@@ -16,17 +16,17 @@ app.use(cors({
     origin: "https://movie-gig-vercel.vercel.app/", // Frontend URLs
     credentials: true, // Allow sending cookies
 }));
-app.get('/', (req, res) => {
+app.get('/api/', (req, res) => {
     res.send("API is running....");
 });
 app.use('/api/auth', authRoutes);
 app.use('/api/watchlist', watchlistRoutes);
-if (process.env.NODE_ENV !== "development") {
-    app.use(express.static(path.join(__dirname, "/frontend/dist")));
-    app.get("*", (req, res) => {
-        res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"));
-    });
-}
+// if (process.env.NODE_ENV !== "development") {
+// 	app.use(express.static(path.join(__dirname, "../../frontend/dist")));
+// 	app.get("*", (req, res) => {
+// 		res.sendFile(path.join(__dirname, "../../frontend", "dist", "index.html"));
+// 	});
+// }
 app.listen(PORT, () => {
     console.log("Server is running on port " + PORT);
 });
