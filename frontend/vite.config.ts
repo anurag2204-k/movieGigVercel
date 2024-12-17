@@ -2,7 +2,6 @@ import { defineConfig } from 'vite'
 import dotenv from 'dotenv';
 import react from '@vitejs/plugin-react'
 
-
 dotenv.config();
 
 // https://vite.dev/config/
@@ -11,7 +10,9 @@ export default defineConfig({
   server:{
     proxy:{
       '/api': {
-        target: 'http://localhost:5001',
+        target: process.env.NODE_ENV === 'production' ? 'https://your-production-api.com' : 'http://localhost:5001',
+        changeOrigin: true,
+        secure: false,
       }
     }
   },

@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(cors({
-    origin: 'http://localhost:5173', // Frontend UR
+    origin: process.env.Frontend_url, // Frontend UR
     credentials: true,  // Allow sending cookies
   }));
 
