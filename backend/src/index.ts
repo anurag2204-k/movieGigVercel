@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(cors({
-	origin: process.env.CLIENT_URL|| "https://movie-gig-vercel.vercel.app/", // Frontend URLs
+	origin: "https://movie-gig-vercel.vercel.app/", // Frontend URLs
 	credentials: true,  // Allow sending cookies
 }));
 
