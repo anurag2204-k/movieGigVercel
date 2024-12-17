@@ -11,7 +11,7 @@ export default defineConfig({
   server:{
     proxy:{
       '/api': {
-        target: process.env.NODE_ENV === 'production' ? 'https://your-production-api.com' : 'http://localhost:5001',
+        target: process.env.NODE_ENV === 'production' ? 'https://movie-gig-backend-gamma.vercel.app/' : 'http://localhost:5001',
         changeOrigin: true,
         secure: false,
       }
