@@ -1,0 +1,48 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String       @id @default(cuid())
+  username  String       @unique
+  email     String       @unique
+  password  String
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  watchlist Watchlist[]
+}
+model Watchlist {
+  id                String    @id @default(cuid())
+  userId            String
+  user              User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  movie_id          String    // Stores the unique 'id' from the API response
+  name              String?
+  title             String?
+  original_title    String?
+  original_name     String?
+  overview          String?
+  poster_path       String?
+  backdrop_path     String?
+  original_language String?
+  release_date      String?
+  adult             Boolean?
+  genre_ids         Int[]
+  popularity        Float?    // Adjusted to float for numerical values
+  vote_average      Float?
+  vote_count        Int?
+  video             Boolean?
+
+  @@unique([userId, movie_id]) // Ensures each movie is unique in a user's watchlist
+}
