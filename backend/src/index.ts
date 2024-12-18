@@ -4,13 +4,12 @@ import watchlistRoutes from "./routes/watchlist.route.js"
 import cookieParser from "cookie-parser";
 import cors from "cors"
 import path from "path";
-
+import { VercelRequest, VercelResponse } from "@vercel/node";
 
 import dotenv from "dotenv";
 dotenv.config();
 
 const PORT = process.env.PORT || 5001;
-const __dirname = path.resolve();
 
 const app = express();
 app.use(express.json());
@@ -35,4 +34,6 @@ app.use('/api/watchlist', watchlistRoutes);
 // 	});
 // }
 
-export default app;
+export default (req: VercelRequest, res: VercelResponse) => {
+    app(req, res);
+};

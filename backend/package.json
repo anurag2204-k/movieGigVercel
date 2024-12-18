@@ -3,13 +3,12 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-"scripts": {
-  "dev": "nodemon --watch src --ext ts --exec \"node --loader ts-node/esm src/index.ts\"",
-  "build": "tsc && prisma generate --schema=./prisma/schema.prisma",
-  "start": "node dist/index.js",
-   "postinstall": "prisma generate"
-}
-,
+  "scripts": {
+    "dev": "nodemon --watch src --ext ts --exec \"node --loader ts-node/esm src/index.ts\"",
+    "build": "tsc && prisma generate --schema=./prisma/schema.prisma",
+    "start": "node dist/index.js",
+    "postinstall": "prisma generate"
+  },
   "type": "module",
   "keywords": [],
   "author": "",
@@ -26,6 +25,7 @@
   },
   "dependencies": {
     "@prisma/client": "^5.21.1",
+    "@vercel/node": "^5.0.0",
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
