@@ -16,10 +16,21 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(cors({
-	origin: "https://movie-gig-vercel.vercel.app/", // Frontend URLs
-	credentials: true,  // Allow sending cookies
+    origin: (origin, callback) => {
+        const allowedOrigins = [
+            "https://movie-gig-vercel.vercel.app/", // Your frontend URL
+            "http://localhost:3000", // Local development
+        ];
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error("Not allowed by CORS"));
+        }
+    },
+    credentials: true, // Allow cookies
 }));
 
+app.options("*", cors());
 app.get('/api/',(req,res)=>{
 	res.send("API is running....")
 })
