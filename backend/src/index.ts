@@ -35,6 +35,4 @@ app.use('/api/watchlist', watchlistRoutes);
 // 	});
 // }
 
-app.listen(PORT, () => {
-	console.log("Server is running on port " + PORT);
-});
+export default app;
