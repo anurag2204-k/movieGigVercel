@@ -59,8 +59,8 @@ const MyCarousel = ({movies}:myCarouselProps) => {
 			return;
 		  }
 	  
-		  const response = await axios.post(
-			"/api/watchlist/add",
+		  const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/watchlist/add`
+			,
 			{ movie, userId },
 			{ withCredentials: true }  // Ensure cookies are sent with the request
 		  );

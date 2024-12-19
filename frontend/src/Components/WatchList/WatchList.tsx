@@ -41,7 +41,7 @@ const WatchList = () => {
     const removeItem = async (itemId: string) => {
         
         try {
-            const res = await axios.put("api/watchlist/remove", {
+            const res = await axios.put(`${import.meta.env.VITE_API_BASE_URL}/api/watchlist/remove`, {
                 id: itemId
             }, {
                 withCredentials: true
@@ -64,7 +64,7 @@ const WatchList = () => {
     useEffect(() => {
         const getList = async () => {
             try {
-                const res = await axios.get("/api/watchlist/list", {
+                const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/watchlist/list` , {
                     withCredentials: true,
                 });
 
