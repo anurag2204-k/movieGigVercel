@@ -19,7 +19,7 @@ app.use(cookieParser());
 
 // Allow specific origin with credentials
 app.use(cors({
-    origin: "https://movie-gig-vercel.vercel.app/", // Allow only this origin
+    origin: "https://movie-gig-vercel.vercel.app", // Allow only this origin
     credentials: true, // Allow sending cookies
 }));
 
