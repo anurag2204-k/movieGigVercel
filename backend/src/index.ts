@@ -34,10 +34,13 @@ app.use(cookieParser());
 //     },
 //     credentials: true, // Allow sending cookies
 // }));
+
 app.use(cors({
-    origin: "*", // Allow all origins
-    credentials: true, // Allow sending cookies
-}));
+    origin: '*', // Frontend URL (adjust accordingly)
+    methods: ['GET', 'POST', 'PUT', 'DELETE','HEAD'], // Allow other methods as needed
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'], // Allow additional headers if required
+    credentials: true, // If you're using cookies or sessions
+  }));
 
 // Routes
 app.get("/api/", (req, res) => {
