@@ -17,9 +17,21 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-// Allow specific origin with credentials
+// Dynamic CORS configuration to allow both versions of the origin (with and without the trailing slash)
 app.use(cors({
-    origin: "https://movie-gig-vercel.vercel.app", // Allow only this origin
+    origin: (origin, callback) => {
+        const allowedOrigins = [
+            "https://movie-gig-vercel.vercel.app",
+            "https://movie-gig-vercel.vercel.app/", // Allow both versions with and without trailing slash
+        ];
+
+        // Check if the origin is in the allowed origins list or if the origin is undefined (e.g., when running locally)
+        if (allowedOrigins.includes((origin || "").replace(/\/$/, "")) || !origin) {
+            callback(null, origin);
+        } else {
+            callback(new Error("Not allowed by CORS"));
+        }
+    },
     credentials: true, // Allow sending cookies
 }));
 
