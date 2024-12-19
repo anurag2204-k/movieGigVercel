@@ -49,8 +49,12 @@ app.get("/api/", (req, res) => {
 app.use("/api/auth", authRoutes);
 app.use("/api/watchlist", watchlistRoutes);
 
-// Handle preflight requests
-app.options("*", cors()); // Optional, may not be necessary with the above
+app.options("*", (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+    res.header("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Requested-With");
+    res.send();
+});
 
 // Vercel-specific export
 export default (req: VercelRequest, res: VercelResponse) => {
