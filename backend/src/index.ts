@@ -19,20 +19,25 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 // Dynamic CORS configuration
-const allowedOrigins = [
-    "https://movie-gig-vercel.vercel.app", // Production
-    "http://localhost:5173",              // Development
-];
+// const allowedOrigins = [
+//     "https://movie-gig-vercel.vercel.app", // Production
+//     "http://localhost:5173",              // Development
+// ];
+
+// app.use(cors({
+//     origin: (origin, callback) => {
+//         if (!origin || allowedOrigins.includes(origin)) {
+//             callback(null, origin);
+//         } else {
+//             callback(new Error("Not allowed by CORS"));
+//         }
+//     },
+//     credentials: true,
+// }));
 
 app.use(cors({
-    origin: (origin, callback) => {
-        if (!origin || allowedOrigins.includes(origin)) {
-            callback(null, origin);
-        } else {
-            callback(new Error("Not allowed by CORS"));
-        }
-    },
-    credentials: true,
+    origin: "*", // This allows all origins
+    credentials: true, // Allow sending cookies
 }));
 
 // Routes
@@ -43,7 +48,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/watchlist", watchlistRoutes);
 
 // Handle preflight requests
-app.options("*", cors());
+// app.options("*", cors());
 
 // Vercel-specific export
 export default (req: VercelRequest, res: VercelResponse) => {
